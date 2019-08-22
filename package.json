@@ -1,0 +1,16 @@
+{
+  "name": "bible-offline",
+  "version": "1.0.0",
+  "description": "Bible ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "YJPrakash",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

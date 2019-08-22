@@ -1,0 +1,4 @@
+node_modules
+.errorLog.txt
+.successLog.txt
+

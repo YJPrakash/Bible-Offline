@@ -7,7 +7,7 @@ app.use(express.static(__dirname));
 //   res.sendfile('index.html');
 // });
 
-// app.listen(80, '0.0.0.0');
-// console.log('Bible app running...');
+app.listen(80, '0.0.0.0');
+console.log('Bible app running...');
 
-module.exports = app;
+// module.exports = app;

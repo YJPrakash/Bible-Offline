@@ -13,6 +13,11 @@ let cache_name = 'bible.localhost'
 let urls_to_cache = [
  '/',
  '/css/materialize.min.css',
+ '/iconfont/MaterialIcons-Regular.eot',
+ '/iconfont/MaterialIcons-Regular.woff2',
+ '/iconfont/MaterialIcons-Regular.woff',
+ '/iconfont/MaterialIcons-Regular.ttf',
+ '/iconfont/material-icons.min.css',
  '/data/enBible.js',
  '/data/taBible.js',
  '/main.js'

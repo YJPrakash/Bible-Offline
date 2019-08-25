@@ -36,6 +36,11 @@
         margin-bottom: 20px;
       }
 
+      #verse_Nav {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
       nav ul li.nomargin {
         margin: 0;
       }
@@ -66,9 +71,8 @@
       </div>
     </nav>
     <main>
-      <form id="bibleForm" action="#">
-
-        <div class="row hide">
+      <form action="#" >
+        <div class="row container hide">
           <div class="col">
             <label for="chapter">Chapter</label>
             <input type="number" name="chapter" id="chapter">
@@ -78,9 +82,15 @@
             <input type="number" name="verse" id="verse">
           </div>
         </div>
-        <div class="row hide">
-          <i class="material-icons" id="back">arrow_back</i><label for="back">Prev</label>
-          <i class="material-icons" id="forward">arrow_forward</i><label for="forward">Next</label>
+        <div id="verse_Nav" class="row container">
+          <a id="back" class="btn waves-effect waves-light left">Prev
+            <i class="material-icons right">arrow_back</i>
+          </a>
+          <a id="forward" class="btn waves-effect waves-light right" name="action">
+            <i class="material-icons right">arrow_forward</i>Next
+          </a>
+          <!-- <i class="material-icons" id="back">arrow_back</i><label for="back">Prev</label>
+            <i class="material-icons" id="forward">arrow_forward</i><label for="forward">Next</label> -->
         </div>
         <div class="row container" id="view">
         </div>

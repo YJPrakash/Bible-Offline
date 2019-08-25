@@ -65,21 +65,23 @@ let processData = () => {
 };
 
 lang.addEventListener('change', processData);
-chapter.addEventListener('change', processData);
 book.addEventListener('change', processData);
-verse.addEventListener('blur', () => {
-  view.querySelector(`div[tabIndex='${verse.value}']`).focus();
-});
-verse.addEventListener('change', () => {
-  verse.blur();
-});
+// chapter.addEventListener('change', processData);
+// verse.addEventListener('blur', () => {
+//   view.querySelector(`div[tabIndex='${verse.value}']`).focus();
+// });
+// verse.addEventListener('change', () => {
+//   verse.blur();
+// });
 back.addEventListener('click', () => {
-  let prevVerses = Number(verse.value) - 1;
-  verse.value = (verse.min <= prevVerses) ? prevVerses : verse.min;
+  let prevChapter = Number(chapter.value) - 1;
+  chapter.value = (chapter.min <= prevChapter) ? prevChapter : chapter.min;
+  processData();
 });
 forward.addEventListener('click', () => {
-  let nextVerses = Number(verse.value) + 1;
-  verse.value = (verse.max >= nextVerses) ? nextVerses : verse.max;
+  let nextChapter = Number(chapter.value) + 1;
+  chapter.value = (chapter.max >= nextChapter) ? nextChapter : chapter.max;
+  processData();
 });
 navMobile.addEventListener('click', (e) => {
   if (e.target.tagName == "LI") {

@@ -27,13 +27,16 @@
       }
 
       .brand-logo {
+        left: 50%;
         text-indent: 60px;
-        background: no-repeat url('/images/manifest/icons8-holy-bible-50.png');
+        background: no-repeat url('/images/manifest/icons8-holy-bible-50.png') center;
       }
+
       #view {
         margin-top: 20px;
         margin-bottom: 20px;
       }
+
       nav ul li.nomargin {
         margin: 0;
       }
@@ -43,17 +46,19 @@
   <body>
     <nav class="white" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo black-text">Holy Bible</a>
-        <div class="right">
-          <!-- <label for="lang">Language</label> -->
-          <select class="browser-default" name="lang" id="lang">
-            <option value="en" tabIndex=-1>English</option>
-            <option value="ta">Tamil</option>
-          </select>
-        </div>
-        <div class="right hide-on-med-and-down">
+        <a id="logo-container" href="#" class="brand-logo black-text">&nbsp;</a>
+        <div class="row right">
+          <div class="col hide-on-med-and-down">
             <!-- <label for="book">Book</label> -->
             <select class="browser-default" name="book" id="book"></select>
+          </div>
+          <div class="col">
+            <!-- <label for="lang">Language</label> -->
+            <select class="browser-default" name="lang" id="lang">
+              <option value="en" tabIndex=-1>English</option>
+              <option value="ta">Tamil</option>
+            </select>
+          </div>
         </div>
 
         <ul id="nav-mobile" class="sidenav black-text browser-default">

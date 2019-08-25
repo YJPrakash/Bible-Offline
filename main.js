@@ -84,8 +84,8 @@ forward.addEventListener('click', () => {
 navMobile.addEventListener('click', (e) => {
   if (e.target.tagName == "LI") {
     navMobileM.close();
-    book.value = e.target.getAttribute("value");
-    // processData();
+    book.selectedIndex = Number(e.target.getAttribute("value")) - 1;
+    processData();
   } else {
     e.target.parentElement.click();
   }

@@ -71,22 +71,22 @@
       </div>
     </nav>
     <main>
-      <form action="#" >
-        <div class="row container hide">
-          <div class="col">
-            <label for="chapter">Chapter</label>
-            <input type="number" name="chapter" id="chapter">
-          </div>
-          <div class="col">
-            <label for="verse">Verse</label>
-            <input type="number" name="verse" id="verse">
-          </div>
-        </div>
+      <form action="#">
         <div id="verse_Nav" class="row container">
-          <a id="back" class="btn waves-effect waves-light left">Prev
+          <a id="back" class="btn waves-effect waves-light col s4 center">Prev
             <i class="material-icons right">arrow_back</i>
           </a>
-          <a id="forward" class="btn waves-effect waves-light right" name="action">
+          <div style="text-align: center;padding: 8px;" class="col s2">
+            Chapter
+          </div>
+          <div class="col s2 chapter_div">
+            <input style="height: 30px;" type="number" name="chapter" id="chapter">
+          </div>
+          <!-- <div class="col s3 hide">
+            <label class='left'>Verse</label>
+            <input class='left' type="number" name="verse" id="verse">
+          </div> -->
+          <a id="forward" class="btn waves-effect waves-light col s4 center" name="action">
             <i class="material-icons right">arrow_forward</i>Next
           </a>
           <!-- <i class="material-icons" id="back">arrow_back</i><label for="back">Prev</label>

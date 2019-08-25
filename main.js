@@ -34,7 +34,7 @@ let listVerse = (verses) => {
   let verseStr = "";
   chapter.max = verses.ChapterMax;
   verses = verses.Verse;
-  verse.max = verses.length;
+  // verse.max = verses.length;
   verses.forEach((verse, idx) => {
     // <div class=col><i class='material-icons small'>stars</i>${verse.Verse}</div>
     verseStr += `<div tabIndex='${idx+1}' class='row'>
@@ -44,7 +44,7 @@ let listVerse = (verses) => {
   view.innerHTML = verseStr;
 };
 
-verse.min = verse.value = 1;
+// verse.min = verse.value = 1;
 chapter.min = chapter.value = 1;
 lang.selectedIndex = 1;
 let processData = () => {
@@ -66,7 +66,8 @@ let processData = () => {
 
 lang.addEventListener('change', processData);
 book.addEventListener('change', processData);
-// chapter.addEventListener('change', processData);
+chapter.addEventListener('change', processData);
+// verse.addEventListener('change', processData);
 // verse.addEventListener('blur', () => {
 //   view.querySelector(`div[tabIndex='${verse.value}']`).focus();
 // });

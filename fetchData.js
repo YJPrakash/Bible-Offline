@@ -1,6 +1,6 @@
-export let fetchJSON = (url)=>{
-  fetch(url).then((res)=>{
+export let fetchJSON = (url, options) => {
+  return fetch(url, options).then(res => {
     // console.log(res);
-    return res.json().then(data => {return data});
+    return res.json();
   });
 }

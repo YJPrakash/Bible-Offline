@@ -1,80 +1,93 @@
 import {
-  enBooksIndex,
-  enBible
-} from './data/enBible.js';
-import {
-  taBooksIndex,
-  taBible
-} from './data/taBible.js';
+  fetchJSON
+} from './fetchData.js';
 
-/*
-console.log("Bible - English");
-console.log(enBooksIndex);
-console.log(enBible);
-console.log("Bible - Tamil");
-console.log(taBooksIndex);
-console.log(taBible);
-*/
-let createBookList = (e) => {
-  let bookIndex;
-  if (e === null) {
-    bookIndex = taBooksIndex;
-  } else if (e.target == lang) {
-    if (lang.value == 'en') {
-      bookIndex = enBooksIndex;
-      lang.value = 'en';
-    } else if (lang.value == 'ta') {
-      bookIndex = taBooksIndex;
-      lang.value = 'ta';
-    }
-  } else {
-    return;
-  }
-  let selectedIndex = (e === null) ? 0 : book.selectedIndex;
+let navMobile = document.querySelector(".sidenav");
+var navMobileM = M.Sidenav.init(navMobile);
+navMobile.addEventListener('click', (e) => {
+  navMobileM.open();
+});
 
-  // book.innerHTML = "";
+let createBookList = (bookIndex) => {
+  let selectedIndex = book.selectedIndex;
+  selectedIndex = (selectedIndex == -1) ? 0 : selectedIndex;
   book.querySelectorAll('option').forEach(option => {
     book.removeChild(option);
   });
+  navMobile.innerHTML = "";
   bookIndex.forEach((bookName, idx) => {
     let option = document.createElement('option');
     option.value = idx + 1;
     option.textContent = bookName;
     book.appendChild(option);
+    let li = document.createElement('li');
+    li.setAttribute("value", idx + 1);
+    li.classList.add('row');
+    li.classList.add('nomargin');
+    li.innerHTML = `<i class='material-icons col'>stars</i><div class='col'>${bookName}</div>`
+    navMobile.appendChild(li);
   });
   book.selectedIndex = selectedIndex;
-  // if(e.target == lang){
-  //   listVerse(e);
-  // }
 };
 
-let listVerse = (e) => {
-  let selectedIndex = book.selectedIndex;
-
-  if (e === null) {
-    book.selectedIndex = 0;
-  } else if (e.target == lang) {
-    if (selectedIndex == -1) {
-      book.selectedIndex = 0;
-    }
-  } else if (e.target == chapter) verse.value = 1;
-
-  selectedIndex = book.selectedIndex;
-  let bibleBook = (lang.value == 'en') ? enBible.Book : taBible.Book;
-  chapter.max = bibleBook[selectedIndex].Chapter.length;
-  let chapter_idx = (Number(chapter.value) > Number(chapter.max)) ? 0 : chapter.value - 1;
-  chapter.value = chapter_idx + 1;
-  verse.max = bibleBook[selectedIndex].Chapter[chapter_idx].Verse.length;
-  let verse_idx = (Number(verse.value) > Number(verse.max)) ? 0 : verse.value - 1;
-  verse.value = verse_idx + 1;
-  view.textContent = bibleBook[selectedIndex].Chapter[chapter_idx].Verse[verse_idx].Verse;
+let listVerse = (verses) => {
+  let verseStr = "";
+  chapter.max = verses.ChapterMax;
+  verses = verses.Verse;
+  verse.max = verses.length;
+  verses.forEach((verse, idx) => {
+    // <div class=col><i class='material-icons small'>stars</i>${verse.Verse}</div>
+    verseStr += `<div tabIndex='${idx+1}' class='row'>
+      <div class=col>${idx+1}. ${verse.Verse}</div>
+    </div>`;
+  });
+  view.innerHTML = verseStr;
 };
-
-bibleForm.addEventListener('change', createBookList);
-bibleForm.addEventListener('change', listVerse);
 
 verse.min = verse.value = 1;
 chapter.min = chapter.value = 1;
 lang.selectedIndex = 1;
-createBookList(null);
-listVerse(null);
+let processData = () => {
+  return fetchJSON(`/book?lang=${lang.value}`, {
+      headers: new Headers(),
+      method: 'GET',
+      async: false
+    }).then(data => {
+      return data.Book;
+    }).then(createBookList)
+    .then(() => {
+      return fetchJSON(`/verses?lang=${lang.value}&b=${book.selectedIndex}&c=${chapter.value}`, {
+        headers: new Headers(),
+        method: 'GET',
+        async: false
+      });
+    }).then(listVerse);
+};
+
+lang.addEventListener('change', processData);
+chapter.addEventListener('change', processData);
+book.addEventListener('change', processData);
+verse.addEventListener('blur', () => {
+  view.querySelector(`div[tabIndex='${verse.value}']`).focus();
+});
+verse.addEventListener('change', () => {
+  verse.blur();
+});
+back.addEventListener('click', () => {
+  let prevVerses = Number(verse.value) - 1;
+  verse.value = (verse.min <= prevVerses) ? prevVerses : verse.min;
+});
+forward.addEventListener('click', () => {
+  let nextVerses = Number(verse.value) + 1;
+  verse.value = (verse.max >= nextVerses) ? nextVerses : verse.max;
+});
+navMobile.addEventListener('click', (e) => {
+  if (e.target.tagName == "LI") {
+    navMobileM.close();
+    book.value = e.target.getAttribute("value");
+    // processData();
+  } else {
+    e.target.parentElement.click();
+  }
+});
+processData();

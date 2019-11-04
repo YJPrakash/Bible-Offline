@@ -24,7 +24,7 @@ let createBookList = (bookIndex) => {
     li.setAttribute("value", idx + 1);
     li.classList.add('row');
     li.classList.add('nomargin');
-    li.innerHTML = `<i class='material-icons col'>stars</i><div class='col'>${bookName}</div>`
+    li.innerHTML = `<i class='material-icons col'>stars</i><div class='col'>${bookName}</div>`;
     navMobile.appendChild(li);
   });
   book.selectedIndex = selectedIndex;

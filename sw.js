@@ -8,7 +8,7 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-let cache_name = 'bible-229417.appspot.com';
+let cache_name = location.host;
 
 let urls_to_cache = [
 	'/',

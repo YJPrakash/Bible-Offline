@@ -10,7 +10,7 @@ app.use(router);
 //   res.sendfile('index.html');
 // });
 
-app.listen(8080, '0.0.0.0');
+app.listen(8088, '0.0.0.0');
 console.log('Bible app running...');
 
 // module.exports = app;

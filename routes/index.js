@@ -9,10 +9,10 @@ const {
   taBible
 } = require('../data/taBible');
 
-
 router.get('/', (req, res) => {
   res.render('index');
 });
+
 router.get('/book', (req, res) => {
   let {
     lang
@@ -22,10 +22,12 @@ router.get('/book', (req, res) => {
     Book: (lang == 'en') ? enBookIndex : taBookIndex
   }));
 });
+
 router.get('/chapter', (req, res) => {
   res.setHeader('content-Type', 'application/json');
   res.send(JSON.stringify());
 });
+
 router.get('/verses', (req, res) => {
   let {
     lang,

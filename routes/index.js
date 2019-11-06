@@ -17,15 +17,13 @@ router.get('/book', (req, res) => {
   let {
     lang
   } = req.query;
-  res.setHeader('content-Type', 'application/json');
-  res.send(JSON.stringify({
+  res.json({
     Book: (lang == 'en') ? enBookIndex : taBookIndex
-  }));
+  });
 });
 
 router.get('/chapter', (req, res) => {
-  res.setHeader('content-Type', 'application/json');
-  res.send(JSON.stringify());
+  res.json(req.query);
 });
 
 router.get('/verses', (req, res) => {
@@ -36,11 +34,10 @@ router.get('/verses', (req, res) => {
   } = req.query;
   let bible = (lang == 'en') ? enBible : taBible;
   let book = bible.Book[b];
-  res.setHeader('content-Type', 'application/json');
-  res.send(JSON.stringify({
+  res.json({
     Verse: book.Chapter[c - 1].Verse,
     ChapterMax: book.Chapter.length
-  }));
+  });
 });
 
 module.exports = router;
